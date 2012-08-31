@@ -1,15 +1,17 @@
 require "hash_rocket/version"
+
 module HashRocket
-  # Your code goes here...
+  import "lib/hash_rocket/railtie" if defined?(Rails)
+  
   @file_names = Dir["#{Rails.root}/**/*"]
+
   def self.convert
     @file_names.each do |fn|
       if fn =~ /\.(rb|erb|haml|spec)/
         begin
           text = File.read(fn)
-          without_space = text.scan(/:[a-z]{1,}\ =>/).flatten
-          with_space = text.scan(/:[a-z]{1,}\ =>\ /).flatten
-          text = organize_symbols(text, without_space, with_space)
+          text = solve_invalid_bit_sequence_in_utf8(text)
+          text = organize_symbols(text)
           File.open(fn, "w") {|file| file.puts text }
         rescue
           puts "ERROR ON #{fn}"
@@ -17,9 +19,19 @@ module HashRocket
       end
     end
   end
+
 private
-  def self.organize_symbols(text, without_space, with_space)
+
+  def solve_invalid_bit_sequence_in_utf8(text)
+    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    return ic.iconv(text)
+  end
+
+  def self.organize_symbols(text)
+    without_space = text.scan(/:[a-z]{1,}\ =>/).flatten
     text = match_symbols(text, without_space, ": ") if without_space
+
+    with_space = text.scan(/:[a-z]{1,}\ =>\ /).flatte
     text = match_symbols(text, with_space, ":") if with_space
     text
   end
@@ -31,5 +43,6 @@ private
     end
     text
   end
+
 private_class_method :organize_symbols, :match_symbols
 end

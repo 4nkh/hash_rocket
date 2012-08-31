@@ -1,7 +1,6 @@
 require "hash_rocket/version"
 
 module HashRocket
-  import "lib/hash_rocket/railtie.rb" if defined?(Rails)
   
   @file_names = Dir["#{Rails.root}/**/*"]
 

@@ -45,3 +45,7 @@ private
 
 private_class_method :organize_symbols, :match_symbols
 end
+
+if defined?(Rails)
+  require "hash_rocket/railtie"
+end

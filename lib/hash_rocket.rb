@@ -1,5 +1,5 @@
 require "hash_rocket/version"
-
+require "iconv"
 module HashRocket
   
   @file_names = Dir["#{Rails.root}/**/*"]
@@ -20,7 +20,7 @@ module HashRocket
   end
 
 private
-
+  # TODO use String#encode instead of Iconv
   def solve_invalid_bit_sequence_in_utf8(text)
     ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
     return ic.iconv(text)

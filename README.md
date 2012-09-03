@@ -30,7 +30,7 @@ Run your console
 
 Replace old hash_rocket
   
-    HashRocket.convert
+    rake hash_rocket:convert
 
 Notes:
 

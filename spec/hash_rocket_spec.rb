@@ -1,5 +1,7 @@
 require 'spec_helper'
+
 describe HashRocket do
+
   let(:folder) { File.expand_path('../..',__FILE__) + "/spec/data" }
   let(:result) { "/result.txt" }
   
@@ -40,4 +42,5 @@ describe HashRocket do
     end
 
   end
+
 end

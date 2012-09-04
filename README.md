@@ -2,11 +2,11 @@
 
 It's a simple gem to replace the old hash rocket 
 
-:symbolize_key => 'value'
+    :symbolize_key => 'value'
 
 between symbolize keys and their values by the new way:
 
-symbolize_key: 'value'
+    symbolize_key: 'value'
 
 ## Installation
 
@@ -28,9 +28,17 @@ Run your console
 
     $ bundle exec rails c
 
-Replace old hash_rocket
+Replace hash_rocket in every rails app files
   
     rake hash_rocket:convert
+
+Specify directory:
+
+    rake hash_rocket:convert FOLDER="/complete/path/to/directory"
+
+Specify a single file path:
+    
+    rake hash_rocket:convert FILE="/complete/path/to/file"
 
 Notes:
 

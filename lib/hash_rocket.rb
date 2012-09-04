@@ -8,7 +8,7 @@ module HashRocket
   end
   
   def self.convert(folder=nil, path=nil)
-    file_names = path ? %W(#{path}) : Dir.glob("**/*")
+    file_names = path ? [%W(#{path})] : Dir.glob("**/*")
     file_names.each do |fn|
       if fn =~ /\.(rb|erb|haml|html|spec)/
         begin

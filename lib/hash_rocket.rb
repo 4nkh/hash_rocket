@@ -11,14 +11,14 @@ module HashRocket
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
       if fn =~ /\.(rb|erb|haml|html|spec)/
-        #begin
+        begin
           text = retrieve_file(folder, path, fn)
           text = solve_invalid_bit_sequence_in_utf8(text)
           text = organize_symbols(text)
           File.open(fn, "w") {|file| file.puts text }
-        #rescue 
-        #  puts "ERROR ON #{fn}" 
-        #end
+        rescue 
+          puts "ERROR ON #{fn}" 
+        end
       end
     end
   end

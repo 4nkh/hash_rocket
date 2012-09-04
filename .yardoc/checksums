@@ -1,0 +1,4 @@
+lib/hash_rocket.rb 9dfe233ddc332996e4f39fbd39473dd1b3b79053
+lib/hash_rocket/object.rb 89d2ca7cce975f794ac1f5111bea3a9d913dd438
+lib/hash_rocket/version.rb 97f8f291230161b43f16060b4d55d00d4064ab2e
+lib/hash_rocket/railtie.rb 5dc2b09c5bbe6946f6223245f62f971e3b2f6ad1

@@ -38,7 +38,7 @@ Specify directory:
 
 Specify a single file path:
     
-    rake hash_rocket:convert FILE="/complete/path/to/file"
+    rake hash_rocket:convert TARGET="/complete/path/to/file"
 
 Notes:
 

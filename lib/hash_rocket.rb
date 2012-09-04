@@ -1,31 +1,37 @@
 require "hash_rocket/version"
 require "iconv"
+require "hash_rocket/object"
 module HashRocket
   
   if defined?(Rails)
     require "hash_rocket/railtie"
   end
   
-  def self.convert(path=nil)
-    file_names = path ? path : Dir.glob("**/*")
+  def self.convert(folder=nil, path=nil)
+    file_names = path ? %W(#{path}) : Dir.glob("**/*")
     file_names.each do |fn|
-      if fn =~ /\.(rb|erb|haml|spec)/
+      if fn =~ /\.(rb|erb|haml|html|spec)/
         begin
-          text = File.read(Rails.root.to_s + "/" + fn)
+          text = retrieve_file(folder, path, fn)
           text = solve_invalid_bit_sequence_in_utf8(text)
           text = organize_symbols(text)
           File.open(fn, "w") {|file| file.puts text }
         rescue 
           puts "ERROR ON #{fn}" 
-         end
+        end
       end
     end
   end
 private
+  def self.retrieve_file(folder, path, fn)
+    File.read((folder ? folder.gsub(/\/$/,'') : Rails.root.to_s) + "/" + fn) unless path
+    File.read(path) if path
+  end
+
   # TODO use String#encode instead of Iconv
   def self.solve_invalid_bit_sequence_in_utf8(text)
     ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-    return ic.iconv(text)
+    ic.iconv(text)
   end
 
   def self.organize_symbols(text)
@@ -44,5 +50,5 @@ private
     text 
   end
 
-private_class_method :organize_symbols, :match_symbols, :solve_invalid_bit_sequence_in_utf8
+private_class_method :retrieve_file, :organize_symbols, :match_symbols, :solve_invalid_bit_sequence_in_utf8
 end

@@ -1,10 +1,10 @@
 # HashRocket
 
-It's a simple gem to replace the old hash rocket 
+It's a simple gem to replace the hash rockets -> 
 
     :symbolize_key => 'value'
 
-between symbolize keys and their values by the new way:
+by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 

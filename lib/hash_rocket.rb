@@ -11,7 +11,8 @@ module HashRocket
     file_names.each do |fn|
       if fn =~ /\.(rb|erb|haml|html|spec)/
         begin
-          text = retrieve_file(folder, path, fn)
+          text = retreive_file(folder, path, fn)
+          text = solve_invalid_byte_sequence_in_utf8(text)
           text = organize_symbols(text)
           File.open(fn, "w") {|file| file.puts text }
         rescue 
@@ -26,9 +27,14 @@ private
     return Dir[folder + "/**/*"] if folder
   end
 
-  def self.retrieve_file(folder, path, fn)
+  def self.retreive_file(folder, path, fn)
     return File.read(folder ? fn : Rails.root.to_s + "/" + fn) unless path
     return File.read(path) if path
+  end
+
+  def self.solve_invalid_byte_sequence_in_utf8(text)
+    text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "") 
+    return text.encode!('UTF-8') 
   end
 
   def self.organize_symbols(text)
@@ -47,5 +53,5 @@ private
     text 
   end
 
-private_class_method :path_parameters, :retrieve_file, :organize_symbols, :match_symbols
+private_class_method :path_parameters, :retreive_file, :solve_invalid_byte_sequence_in_utf8, :organize_symbols, :match_symbols
 end

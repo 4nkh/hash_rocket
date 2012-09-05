@@ -3,3 +3,6 @@
 *.bak
 *.DS_Store
 *.gem
+.rspec
+.gitignore
+.yarddoc

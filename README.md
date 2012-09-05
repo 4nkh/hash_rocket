@@ -10,10 +10,10 @@ by the other ruby symbolize keys convention ->
 
 Supported formats:
   
-  rb
-  erb
-  html
-  haml
+rb
+erb
+html
+haml
   
 ## Installation
 

@@ -8,6 +8,13 @@ by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 
+Supported formats:
+  
+  rb
+  erb
+  html
+  haml
+  
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,10 +30,6 @@ Or install it yourself as:
     $ gem install hash_rocket
 
 ## Usage
-
-Run your console
-
-    $ bundle exec rails c
 
 Replace hash_rocket in every rails app files
   

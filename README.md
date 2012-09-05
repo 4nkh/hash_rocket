@@ -8,12 +8,7 @@ by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 
-Supported formats:
-  
-rb
-erb
-html
-haml
+Supported formats: ( rb, erb, html, haml )
   
 ## Installation
 

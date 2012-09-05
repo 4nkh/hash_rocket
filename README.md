@@ -8,7 +8,7 @@ by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 
-Supported formats: ( rb, erb, html, haml )
+Supported formats: ( rb, erb, html, haml, spec ) + Gemfile
   
 ## Installation
 
@@ -37,6 +37,12 @@ Specify directory:
 Specify a single file path:
     
     rake hash_rocket:convert TARGET="/complete/path/to/file"
+
+Specify verbose mode (print all the matching string):
+
+    rake hash_rocket:convert VERBOSE="true"
+
+You can pass more than one option as well
 
 Notes:
 

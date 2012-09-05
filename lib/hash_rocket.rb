@@ -6,14 +6,14 @@ module HashRocket
     require "hash_rocket/railtie"
   end
   
-  def self.convert(folder=nil, path=nil)
+  def self.convert(folder=nil, path=nil, verbose=nil)
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
-      if fn =~ /\.(rb|erb|haml|html|spec)/
+      if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec))/
         begin
           text = retreive_file(folder, path, fn)
           text = solve_invalid_byte_sequence_in_utf8(text)
-          text = organize_symbols(text)
+          text = organize_symbols(text, verbose)
           File.open(fn, "w") {|file| file.puts text }
         rescue 
           puts "ERROR ON #{fn}" 
@@ -37,15 +37,16 @@ private
     return text.encode!('UTF-8') 
   end
 
-  def self.organize_symbols(text)
+  def self.organize_symbols(text, verbose)
     result = text.scan(/((\ |^(?!::)):\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
-    text = match_symbols(text, result) if result
+    text = match_symbols(text, result, verbose) if result
     text
   end
   
-  def self.match_symbols(text, strings)
+  def self.match_symbols(text, strings, verbose)
     strings.uniq.each do |str|
       unless str.blank?
+        puts str if verbose
         start, symbol, hash_rocket = str.match(/(^\ ?:*)(.+)((\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).captures
         text = text.gsub(str, start.gsub(':','') + symbol.gsub(/\ /, "") + ": ")
       end

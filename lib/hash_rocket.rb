@@ -46,8 +46,9 @@ private
   def self.match_symbols(text, strings, verbose)
     strings.uniq.each do |str|
       unless str.blank?
-        puts str #if verbose
+        puts str if verbose
         start, garbage, symbol, hash_rocket = str.match(/((^.{1,}:)|:)(.+)((\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).captures
+        space = start.gsub(":","")
         text = text.gsub(str, (space == "" ? "\n": space) + symbol.gsub(/\ /, "") + ": ")
       end
     end

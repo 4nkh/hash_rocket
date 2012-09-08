@@ -16,6 +16,8 @@ class Example
     :_begin_with_under_score => 'value'
     {:hash_start => 'value'
     :hash_end => {'value'
+    ,:class => 'value'
+    (:cache => 'value'
   end
 
 end

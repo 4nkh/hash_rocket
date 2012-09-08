@@ -18,6 +18,7 @@ class Example
     :hash_end => {'value'
     ,:class => 'value'
     (:cache => 'value'
+    paginate:page => 'value'
   end
 
 end

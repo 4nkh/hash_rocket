@@ -48,12 +48,21 @@ private
       unless str.blank?
         puts str if verbose
         start, garbage, symbol, hash_rocket = str.match(/((^.{1,}:)|:)(.+)((\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).captures
-        space = start.gsub(":","")
-        text = text.gsub(str, (space == "" ? "\n": space) + symbol.gsub(/\ /, "") + ": ")
+        space = return_space(start.gsub(":",""))
+        text = text.gsub(str, space + symbol.gsub(/\ /, "") + ": ")
       end
     end
     text 
   end
-
-private_class_method :path_parameters, :retreive_file, :solve_invalid_byte_sequence_in_utf8, :organize_symbols, :match_symbols
+  
+  def self.return_space(data)
+    if data == ""
+      "\n"
+    elsif data != " "
+      data + " "
+    else
+      data
+    end  
+  end
+private_class_method :path_parameters, :retreive_file, :solve_invalid_byte_sequence_in_utf8, :organize_symbols, :match_symbols, :return_space
 end

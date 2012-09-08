@@ -14,10 +14,11 @@ no_ident: 'value'
     left_double_space: 'value'
     right_double_space: 'value'
     _begin_with_under_score: 'value'
-    {hash_start: 'value'
+    { hash_start: 'value'
     hash_end: {'value'
-    ,class: 'value'
-    (cache: 'value'
+    , class: 'value'
+    ( cache: 'value'
+    paginate page: 'value'
   end
 
 end

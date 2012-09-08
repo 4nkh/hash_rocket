@@ -38,7 +38,7 @@ private
   end
 
   def self.organize_symbols(text, verbose)
-    result = text.scan(/((\ |^(?!::)):\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
+    result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
     text = match_symbols(text, result, verbose) if result
     text
   end
@@ -46,9 +46,9 @@ private
   def self.match_symbols(text, strings, verbose)
     strings.uniq.each do |str|
       unless str.blank?
-        puts str if verbose
-        start, symbol, hash_rocket = str.match(/(^\ ?:*)(.+)((\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).captures
-        text = text.gsub(str, start.gsub(':','') + symbol.gsub(/\ /, "") + ": ")
+        puts str #if verbose
+        start, garbage, symbol, hash_rocket = str.match(/((^.{1,}:)|:)(.+)((\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).captures
+        text = text.gsub(str, (space == "" ? "\n": space) + symbol.gsub(/\ /, "") + ": ")
       end
     end
     text 

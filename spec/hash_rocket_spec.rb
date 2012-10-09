@@ -5,7 +5,7 @@ describe HashRocket do
   let(:folder) { File.expand_path('../..',__FILE__) + "/spec/data" }
   let(:result) { "/result.txt" }
   
-  describe "hash_rocket should be replaced if the file extention is supported: " do
+  context "hash_rocket should be replaced if the file extention is supported: " do
 
     before :each do
       @file = folder + example.metadata[:file_ext]

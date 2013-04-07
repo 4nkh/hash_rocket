@@ -48,4 +48,3 @@ Notes:
 
     This script will prompt you the files he cannot parse
     --> ERROR ON /path/to/the/problematic/file
-

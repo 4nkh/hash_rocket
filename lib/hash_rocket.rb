@@ -7,7 +7,6 @@ module HashRocket
   end
   
   def self.convert(folder=nil, path=nil, verbose=nil)
-    puts ".... #{path}"
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
       if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec))/
@@ -36,7 +35,6 @@ private
   def self.solve_invalid_byte_sequence_in_utf8(text)
     if defined?(Rails)
       text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "")
-      puts "mouahha1" 
       return text.encode!('UTF-8')
     else
       return text
@@ -44,6 +42,7 @@ private
   end
 
   def self.organize_symbols(text, verbose)
+    # TODO replace the duplicated regez part to include first_liner symbol to parse
     result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))|(^:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
     text = match_symbols(text, result, verbose) if result
     text

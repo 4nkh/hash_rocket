@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hash_rocket (0.3.7)
+    hash_rocket (0.3.8)
 
 GEM
   remote: https://rubygems.org/

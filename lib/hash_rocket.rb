@@ -60,13 +60,9 @@ private
   end
   
   def self.return_space(data)
-    if data == ""
-      "\n"
-    elsif data != " "
-      data + " "
-    else
-      data
-    end  
+    return "\n" if data == ""
+    return data + " " if data != " "
+    data  
   end
 private_class_method :path_parameters, :retreive_file, :solve_invalid_byte_sequence_in_utf8, :organize_symbols, :match_symbols, :return_space
 end

@@ -48,26 +48,3 @@ Notes:
 
     This script will prompt you the files he cannot parse
     --> ERROR ON /path/to/the/problematic/file
-
-
-## Stats
-
-    $ rake hash_rocket:convert VERBOSE=true
-    ...
-    It took 6.5375 seconds to complete the process
-
-    $ rake stats
-    +----------------------+-------+-------+---------+---------+-----+-------+
-    | Name                 | Lines |   LOC | Classes | Methods | M/C | LOC/M |
-    +----------------------+-------+-------+---------+---------+-----+-------+
-    | Controllers          | 47834 | 34550 |     141 |    2174 |  15 |    13 |
-    | Helpers              |  4044 |  3119 |       1 |     321 | 321 |     7 |
-    | Models               | 25677 | 18657 |     309 |    1712 |   5 |     8 |
-    | Libraries            |  2809 |  1961 |      76 |     151 |   1 |    10 |
-    | Model specs          |   190 |   160 |       0 |       0 |   0 |     0 |
-    +----------------------+-------+-------+---------+---------+-----+-------+
-    | Total                | 80554 | 58447 |     527 |    4358 |   8 |    11 |
-    +----------------------+-------+-------+---------+---------+-----+-------+
-      Code LOC: 58287     Test LOC: 160     Code to Test Ratio: 1:0.0
-      
-    

@@ -9,15 +9,17 @@ module HashRocket
   def self.convert(folder=nil, path=nil, verbose=nil)
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
-      if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec))/
+      if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec|rake|yml))/
         begin
           text = retreive_file(folder, path, fn)
           text = solve_invalid_byte_sequence_in_utf8(text)
           text = organize_symbols(text, verbose)
           File.open(fn, "w") {|file| file.puts text }
-        rescue 
-          puts "ERROR ON #{fn}" 
+        rescue => e
+          puts "ERROR: -------> #{e} .......\n ON THIS FILE: -----> #{fn}" 
         end
+      else
+        puts "THE FOLLOWING FILE CAN'T BE CONVERTED: -----> #{fn}" if verbose
       end
     end
   end

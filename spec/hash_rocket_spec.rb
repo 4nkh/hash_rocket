@@ -10,9 +10,8 @@ describe HashRocket do
     before :each do
       @file = folder + example.metadata[:file_ext]
       @backup = File.read(@file)
-      HashRocket.convert(nil, @file, true)
+      HashRocket.convert(nil, @file) #add true for verbose
       @conversion = File.read(@file)
-      puts @conversion
     end
 
     after :each do
@@ -41,11 +40,15 @@ describe HashRocket do
     end
 
     it ".rake", file_ext: "/file.rake" do
-      @conversion.should_not eq File.read(folder + result)      
+      @conversion.should eq File.read(folder + result)      
     end
 
     it ".yml", file_ext: "/file.yml" do
-      @conversion.should_not eq File.read(folder + result)      
+      @conversion.should eq File.read(folder + result)      
+    end
+
+    it ".h", file_ext: "/file.h" do
+      @conversion.should eq @backup      
     end
 
   end

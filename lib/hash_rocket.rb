@@ -44,7 +44,7 @@ private
   end
 
   def self.organize_symbols(text, verbose)
-    # TODO replace the duplicated regez part to include first_liner symbol to parse
+    # TODO replace regex to match "first_line" without duplicated expression (remove OR / flatten )
     result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))|(^:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
     text = match_symbols(text, result, verbose) if result
     text

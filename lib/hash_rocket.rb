@@ -7,6 +7,7 @@ module HashRocket
   end
   
   def self.convert(folder=nil, path=nil, verbose=nil)
+    puts ".... #{path}"
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
       if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec))/
@@ -33,12 +34,17 @@ private
   end
 
   def self.solve_invalid_byte_sequence_in_utf8(text)
-    text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "") 
-    return text.encode!('UTF-8') 
+    if defined?(Rails)
+      text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "")
+      puts "mouahha1" 
+      return text.encode!('UTF-8')
+    else
+      return text
+    end
   end
 
   def self.organize_symbols(text, verbose)
-    result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
+    result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))|(^:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
     text = match_symbols(text, result, verbose) if result
     text
   end

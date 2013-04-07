@@ -1,3 +1,4 @@
+:first_line => 'value'
 class Example
   
   def foo
@@ -19,6 +20,8 @@ class Example
     ,:class => 'value'
     (:cache => 'value'
     paginate:page => 'value'
+    :multiple=>'value',:symbol=>'value'
+    :multiple => 2,:symbol=>'value'
   end
 
 end

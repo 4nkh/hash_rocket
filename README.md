@@ -8,7 +8,7 @@ by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 
-Supported formats: ( rb, erb, html, haml, spec, rake, yml ) + Gemfile
+Supported formats: ( rb, erb, html, haml, spec, rake, yml ) + Gemfile + Capfile
   
 ## Installation
 

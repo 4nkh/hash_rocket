@@ -1,6 +1,7 @@
 require "hash_rocket/version"
 require "hash_rocket/object"
-require "hash_rocket/boom"
+require "hash_rocket/error"
+require "hash_rocket/notification"
 module HashRocket
 
   if defined?(Rails)
@@ -17,15 +18,19 @@ module HashRocket
           text = organize_symbols(text, verbose)
           File.open(fn, "w") {|file| file.puts text }
         rescue => e
-          ::Boom.process_error(e, fn)
+          ::Error.process_error(e, fn)
         end
       else
-        ::Boom.unprocessable_file(fn) if verbose
+        ::Error.unprocessable_file(fn) if verbose
       end
     end
+    ::Notification.timer(Time.now - @start) if verbose
   end
+
 private
+  
   def self.path_parameters(folder,path)
+    @start = Time.now
     return path ? %W(#{path}) : Dir.glob("**/*") unless folder
     return Dir[folder + "/**/*"] if folder
   end
@@ -41,7 +46,7 @@ private
   end
 
   def self.organize_symbols(text, verbose)
-    # TODO replace regex to match "first_line" without duplicated expression (remove OR / flatten )
+    # TODO replace regex to match "first_line" without duplicated expression ( remove OR / flatten )
     result = text.scan(/([^:]:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))|(^:\w{1,}(\ {1,}|[\ {1,}]?)=>(\ {1,}|[\ ]?))/).flatten
     text = match_symbols(text, result, verbose) if result
     text

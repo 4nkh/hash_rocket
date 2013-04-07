@@ -8,7 +8,7 @@ by the other ruby symbolize keys convention ->
 
     symbolize_key: 'value'
 
-Supported formats: ( rb, erb, html, haml, spec ) + Gemfile
+Supported formats: ( rb, erb, html, haml, spec, rake, yml ) + Gemfile
   
 ## Installation
 
@@ -32,11 +32,11 @@ Replace hash_rocket in every rails app files
 
 Specify directory:
 
-    rake hash_rocket:convert FOLDER="/complete/path/to/directory"
+    rake hash_rocket:convert FOLDER="/!!COMPLETE!!/path/to/directory"
 
 Specify a single file path:
     
-    rake hash_rocket:convert TARGET="/complete/path/to/file"
+    rake hash_rocket:convert TARGET="/!!COMPLETE!!/path/to/file"
 
 Specify verbose mode (print all the matching string):
 

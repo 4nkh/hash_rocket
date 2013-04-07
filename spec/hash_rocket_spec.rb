@@ -40,6 +40,10 @@ describe HashRocket do
       @conversion.should eq File.read(folder + result)      
     end
 
+    it ".rake", file_ext: "/file.rake" do
+      @conversion.should_not eq File.read(folder + result)      
+    end
+
     it ".yml", file_ext: "/file.yml" do
       @conversion.should_not eq File.read(folder + result)      
     end

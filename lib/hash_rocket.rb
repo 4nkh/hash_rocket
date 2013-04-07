@@ -1,7 +1,8 @@
 require "hash_rocket/version"
 require "hash_rocket/object"
+require "hash_rocket/boom"
 module HashRocket
-  
+
   if defined?(Rails)
     require "hash_rocket/railtie"
   end
@@ -12,14 +13,14 @@ module HashRocket
       if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec|rake|yml))/
         begin
           text = retreive_file(folder, path, fn)
-          text = solve_invalid_byte_sequence_in_utf8(text)
+          text = solve_invalid_byte_sequence_in_utf8(text) if defined?(Rails)
           text = organize_symbols(text, verbose)
           File.open(fn, "w") {|file| file.puts text }
         rescue => e
-          puts "ERROR: -------> #{e} .......\n ON THIS FILE: -----> #{fn}" 
+          ::Boom.process_error(e, fn)
         end
       else
-        puts "THE FOLLOWING FILE CAN'T BE CONVERTED: -----> #{fn}" if verbose
+        ::Boom.unprocessable_file(fn) if verbose
       end
     end
   end
@@ -35,12 +36,8 @@ private
   end
 
   def self.solve_invalid_byte_sequence_in_utf8(text)
-    if defined?(Rails)
-      text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "")
-      return text.encode!('UTF-8')
-    else
-      return text
-    end
+    text.encode!('UTF-16', undef: :replace, invalid: :replace, replace: "")
+    return text.encode!('UTF-8')
   end
 
   def self.organize_symbols(text, verbose)

@@ -10,7 +10,7 @@ describe HashRocket do
     before :each do
       @file = folder + example.metadata[:file_ext]
       @backup = File.read(@file)
-      HashRocket.convert(nil, @file) #add true for verbose
+      HashRocket.convert(nil, @file) # Add true for verbose
       @conversion = File.read(@file)
     end
 

@@ -19,6 +19,10 @@ describe HashRocket do
       @backup.should eq File.read(@file)
     end
 
+    it "Capfile", file_ext: "/Capfile" do
+      @conversion.should eq File.read(folder + result)
+    end
+
     it "Gemfile", file_ext: "/Gemfile" do
       @conversion.should eq File.read(folder + result)
     end

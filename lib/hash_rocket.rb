@@ -11,7 +11,7 @@ module HashRocket
   def self.convert(folder=nil, path=nil, verbose=nil)
     file_names = path_parameters(folder, path)
     file_names.each do |fn|
-      if fn =~ /(Gemfile|\.(erb|rb|html|haml|spec|rake|yml))/
+      if fn =~ /(Gemfile|Capfile|\.(erb|rb|html|haml|spec|rake|yml))/
         begin
           text = retreive_file(folder, path, fn)
           text = solve_invalid_byte_sequence_in_utf8(text) if defined?(Rails)
@@ -29,7 +29,7 @@ module HashRocket
 
 private
   
-  def self.path_parameters(folder,path)
+  def self.path_parameters(folder, path)
     @start = Time.now
     return path ? %W(#{path}) : Dir.glob("**/*") unless folder
     return Dir[folder + "/**/*"] if folder
